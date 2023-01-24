@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = ImageLoaderViewModel()
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Button {
+                viewModel.loadImage()
+            } label: {
+                Text("Load")
+            }
         }
         .padding()
     }
