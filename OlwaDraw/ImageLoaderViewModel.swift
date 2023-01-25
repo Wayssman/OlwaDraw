@@ -8,7 +8,11 @@
 import SwiftUI
 
 @MainActor class ImageLoaderViewModel: ObservableObject {
-    @Published private(set) var workImage: Image? = nil
+    // MARK: Properties
+    @Published var workImage: Image? = nil
+    
+    // MARK: Dependencies
+    private let fileManager = FileManager()
     
     func loadImage() {
         
