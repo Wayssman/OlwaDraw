@@ -13,8 +13,9 @@ struct MainPageView: View {
     
     var body: some View {
         VStack {
-            // Image Preview
-            ZStack {
+            // Image Preview Area
+            ZStack(alignment: .topTrailing) {
+                // Image Preview
                 Rectangle()
                     .fill(.gray.opacity(0.2))
                 
@@ -25,6 +26,32 @@ struct MainPageView: View {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFit()
+                }
+                
+                // Export Button
+                ZStack(alignment: .center) {
+                    Circle()
+                        .fill(.white)
+                        .frame(
+                            width: 32,
+                            height: 32
+                        )
+                    
+                    Image(systemName: "square.and.arrow.up")
+                        .resizable()
+                        .frame(width: 14, height: 16)
+                        .offset(y: -2)
+                        .foregroundColor(.black)
+                }
+                .offset(
+                    CGSize(
+                        width: -10,
+                        height: 10
+                    )
+                )
+                .shadow(radius: 2)
+                .onTapGesture {
+                    viewModel.exportData()
                 }
             }
             .padding(.leading, 10)
@@ -71,6 +98,13 @@ struct MainPageView: View {
                 .shadow(color: .gray, radius: 8, x: 0, y: 0)
         }
         .edgesIgnoringSafeArea(.bottom)
+        .alert(isPresented: $viewModel.isAlertShown) {
+            Alert(
+                title: Text("Ошибка"),
+                message: Text("Не удалось экспортировать изображение"),
+                dismissButton: .cancel()
+            )
+        }
     }
 }
 

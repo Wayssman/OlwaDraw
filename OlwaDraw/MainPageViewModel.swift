@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 
-@MainActor class MainPageViewModel: ObservableObject {
+@MainActor class MainPageViewModel: NSObject, ObservableObject {
     // MARK: Properties
     @Published var selectedItem: PhotosPickerItem? {
         didSet {
@@ -16,6 +16,7 @@ import PhotosUI
         }
     }
     @Published var selectedImageData: Data?
+    @Published var isAlertShown: Bool = false
     
     // MARK: Internal
     private func getImageDataFromPickerItem() {
@@ -26,5 +27,21 @@ import PhotosUI
             
             selectedImageData = data
         }
+    }
+    
+    func exportData() {
+        guard
+            let selectedImageData,
+            let imageForExport = UIImage(data: selectedImageData)
+        else {
+            isAlertShown = true
+            return
+        }
+        
+        UIImageWriteToSavedPhotosAlbum(imageForExport, self, #selector(exportCompletion), nil)
+    }
+    
+    @objc private func exportCompletion(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        isAlertShown = (error != nil)
     }
 }
