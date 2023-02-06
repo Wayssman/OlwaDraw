@@ -8,17 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		70C0BE9E297FB88500BA29AD /* OlwaDrawApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C0BE9D297FB88500BA29AD /* OlwaDrawApp.swift */; };
-		70C0BEA0297FB88500BA29AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C0BE9F297FB88500BA29AD /* ContentView.swift */; };
 		70C0BEA2297FB88800BA29AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70C0BEA1297FB88800BA29AD /* Assets.xcassets */; };
 		70C0BEA5297FB88800BA29AD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70C0BEA4297FB88800BA29AD /* Preview Assets.xcassets */; };
+		70C0BEAE2980193D00BA29AD /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C0BEAD2980193D00BA29AD /* MainPageView.swift */; };
+		70C0BEB029801A1300BA29AD /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C0BEAF29801A1300BA29AD /* MainPageViewModel.swift */; };
+		70C0BEB229801EFC00BA29AD /* CornerRadiusStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C0BEB129801EFC00BA29AD /* CornerRadiusStyle.swift */; };
+		70C0BEB429801F6C00BA29AD /* CornerRadiusShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C0BEB329801F6C00BA29AD /* CornerRadiusShape.swift */; };
+		70C0BEB629801FEE00BA29AD /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C0BEB529801FEE00BA29AD /* View+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		70A9EE0529913061007DEF7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		70C0BE9A297FB88500BA29AD /* OlwaDraw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OlwaDraw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70C0BE9D297FB88500BA29AD /* OlwaDrawApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OlwaDrawApp.swift; sourceTree = "<group>"; };
-		70C0BE9F297FB88500BA29AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		70C0BEA1297FB88800BA29AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70C0BEA4297FB88800BA29AD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		70C0BEAD2980193D00BA29AD /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
+		70C0BEAF29801A1300BA29AD /* MainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
+		70C0BEB129801EFC00BA29AD /* CornerRadiusStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusStyle.swift; sourceTree = "<group>"; };
+		70C0BEB329801F6C00BA29AD /* CornerRadiusShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusShape.swift; sourceTree = "<group>"; };
+		70C0BEB529801FEE00BA29AD /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +60,15 @@
 		70C0BE9C297FB88500BA29AD /* OlwaDraw */ = {
 			isa = PBXGroup;
 			children = (
+				70A9EE0529913061007DEF7D /* Info.plist */,
 				70C0BE9D297FB88500BA29AD /* OlwaDrawApp.swift */,
-				70C0BE9F297FB88500BA29AD /* ContentView.swift */,
+				70C0BEAD2980193D00BA29AD /* MainPageView.swift */,
+				70C0BEAF29801A1300BA29AD /* MainPageViewModel.swift */,
 				70C0BEA1297FB88800BA29AD /* Assets.xcassets */,
 				70C0BEA3297FB88800BA29AD /* Preview Content */,
+				70C0BEB129801EFC00BA29AD /* CornerRadiusStyle.swift */,
+				70C0BEB529801FEE00BA29AD /* View+Extensions.swift */,
+				70C0BEB329801F6C00BA29AD /* CornerRadiusShape.swift */,
 			);
 			path = OlwaDraw;
 			sourceTree = "<group>";
@@ -137,7 +151,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70C0BEA0297FB88500BA29AD /* ContentView.swift in Sources */,
+				70C0BEB429801F6C00BA29AD /* CornerRadiusShape.swift in Sources */,
+				70C0BEB229801EFC00BA29AD /* CornerRadiusStyle.swift in Sources */,
+				70C0BEB029801A1300BA29AD /* MainPageViewModel.swift in Sources */,
+				70C0BEAE2980193D00BA29AD /* MainPageView.swift in Sources */,
+				70C0BEB629801FEE00BA29AD /* View+Extensions.swift in Sources */,
 				70C0BE9E297FB88500BA29AD /* OlwaDrawApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,7 +288,8 @@
 				DEVELOPMENT_TEAM = P77P34C9FQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = OlwaDraw/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We want to save photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
@@ -301,7 +320,8 @@
 				DEVELOPMENT_TEAM = P77P34C9FQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = OlwaDraw/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We want to save photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
