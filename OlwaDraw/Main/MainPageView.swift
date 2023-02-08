@@ -20,8 +20,7 @@ struct MainPageView: View {
                     .fill(.gray.opacity(0.2))
                 
                 if
-                    let selectedImageData = viewModel.selectedImageData,
-                    let uiImage = UIImage(data: selectedImageData)
+                    let uiImage = viewModel.assembledCompositionImage
                 {
                     Image(uiImage: uiImage)
                         .resizable()
@@ -61,7 +60,7 @@ struct MainPageView: View {
             HStack(spacing: 10) {
                 // Picker Action Button
                 PhotosPicker(
-                    selection: $viewModel.selectedItem,
+                    selection: $viewModel.lastPickedItem,
                     matching: .images,
                     photoLibrary: .shared()
                 ) {
@@ -91,8 +90,7 @@ struct MainPageView: View {
             .padding(.trailing, 10)
             
             // Items List
-            Rectangle()
-                .fill(.white)
+            ObjectsListView(viewModel: viewModel)
                 .frame(maxHeight: 200)
                 .cornerRadius(radius: 20, corners: [.topLeft, .topRight])
                 .shadow(color: .gray, radius: 8, x: 0, y: 0)
