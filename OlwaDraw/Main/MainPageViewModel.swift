@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 
-@MainActor class MainPageViewModel: ObservableObject {
+@MainActor class MainPageViewModel: NSObject, ObservableObject {
     // MARK: Properties
     @Published var lastPickedItem: PhotosPickerItem? {
         didSet {
@@ -16,10 +16,12 @@ import PhotosUI
         }
     }
     @Published var compositionObjects: [ODCompositionObject] = []
+    @Published var isAlertShown: Bool = false
     var assembledCompositionImage: UIImage?
     
     // MARK: Initializers
-    init() {
+    override init() {
+        super.init()
         prepareCanvas()
         assembleComposition()
     }
@@ -40,6 +42,21 @@ import PhotosUI
         )
         compositionObjects.append(canvasCompositionObject)
         compositionObjects.sort(by: { $0.layerIndex < $1.layerIndex })
+    }
+    
+    func exportData() {
+        guard
+            let imageForExport = assembledCompositionImage
+        else {
+            isAlertShown = true
+            return
+        }
+        
+        UIImageWriteToSavedPhotosAlbum(imageForExport, self, #selector(exportCompletion), nil)
+    }
+    
+    @objc private func exportCompletion(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        isAlertShown = (error != nil)
     }
     
     private func addImageToComposition() {
