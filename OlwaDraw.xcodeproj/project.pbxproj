@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		701F31802993916800DD3942 /* ObjectsListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F317F2993916800DD3942 /* ObjectsListRow.swift */; };
+		701F31822993AF1500DD3942 /* ODCompositionObjectContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F31812993AF1500DD3942 /* ODCompositionObjectContent.swift */; };
+		703FA295299151ED00782BEE /* ObjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FA294299151ED00782BEE /* ObjectsListView.swift */; };
+		703FA298299152CD00782BEE /* ODCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FA297299152CD00782BEE /* ODCanvas.swift */; };
+		703FA29A299152E900782BEE /* ODImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FA299299152E900782BEE /* ODImage.swift */; };
+		703FA29C299152F500782BEE /* ODText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FA29B299152F500782BEE /* ODText.swift */; };
+		703FA29F2991532000782BEE /* ODCompositionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FA29E2991532000782BEE /* ODCompositionObject.swift */; };
+		703FA2A1299159D400782BEE /* ODCompositionObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FA2A0299159D400782BEE /* ODCompositionObjectType.swift */; };
 		70C0BE9E297FB88500BA29AD /* OlwaDrawApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C0BE9D297FB88500BA29AD /* OlwaDrawApp.swift */; };
 		70C0BEA0297FB88500BA29AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C0BE9F297FB88500BA29AD /* ContentView.swift */; };
 		70C0BEA2297FB88800BA29AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70C0BEA1297FB88800BA29AD /* Assets.xcassets */; };
@@ -20,6 +28,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		701F317F2993916800DD3942 /* ObjectsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsListRow.swift; sourceTree = "<group>"; };
+		701F31812993AF1500DD3942 /* ODCompositionObjectContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODCompositionObjectContent.swift; sourceTree = "<group>"; };
+		703FA294299151ED00782BEE /* ObjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsListView.swift; sourceTree = "<group>"; };
+		703FA297299152CD00782BEE /* ODCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODCanvas.swift; sourceTree = "<group>"; };
+		703FA299299152E900782BEE /* ODImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODImage.swift; sourceTree = "<group>"; };
+		703FA29B299152F500782BEE /* ODText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODText.swift; sourceTree = "<group>"; };
+		703FA29E2991532000782BEE /* ODCompositionObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODCompositionObject.swift; sourceTree = "<group>"; };
+		703FA2A0299159D400782BEE /* ODCompositionObjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODCompositionObjectType.swift; sourceTree = "<group>"; };
 		70C0BE9A297FB88500BA29AD /* OlwaDraw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OlwaDraw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70C0BE9D297FB88500BA29AD /* OlwaDrawApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OlwaDrawApp.swift; sourceTree = "<group>"; };
 		70C0BE9F297FB88500BA29AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +60,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		703FA2922991519E00782BEE /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				70C0BEAD2980193D00BA29AD /* MainPageView.swift */,
+				70C0BEAF29801A1300BA29AD /* MainPageViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		703FA293299151B600782BEE /* ObjectsList */ = {
+			isa = PBXGroup;
+			children = (
+				703FA29D299152FA00782BEE /* Protocols */,
+				703FA2962991526600782BEE /* Entities */,
+				703FA294299151ED00782BEE /* ObjectsListView.swift */,
+				701F317F2993916800DD3942 /* ObjectsListRow.swift */,
+			);
+			path = ObjectsList;
+			sourceTree = "<group>";
+		};
+		703FA2962991526600782BEE /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				703FA29E2991532000782BEE /* ODCompositionObject.swift */,
+				703FA297299152CD00782BEE /* ODCanvas.swift */,
+				703FA299299152E900782BEE /* ODImage.swift */,
+				703FA29B299152F500782BEE /* ODText.swift */,
+				703FA2A0299159D400782BEE /* ODCompositionObjectType.swift */,
+				701F31812993AF1500DD3942 /* ODCompositionObjectContent.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		703FA29D299152FA00782BEE /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		70C0BE91297FB88500BA29AD = {
 			isa = PBXGroup;
 			children = (
@@ -63,9 +119,9 @@
 		70C0BE9C297FB88500BA29AD /* OlwaDraw */ = {
 			isa = PBXGroup;
 			children = (
+				703FA293299151B600782BEE /* ObjectsList */,
+				703FA2922991519E00782BEE /* Main */,
 				70C0BE9D297FB88500BA29AD /* OlwaDrawApp.swift */,
-				70C0BEAD2980193D00BA29AD /* MainPageView.swift */,
-				70C0BEAF29801A1300BA29AD /* MainPageViewModel.swift */,
 				70C0BE9F297FB88500BA29AD /* ContentView.swift */,
 				70C0BEA1297FB88800BA29AD /* Assets.xcassets */,
 				70C0BEA3297FB88800BA29AD /* Preview Content */,
@@ -155,14 +211,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				703FA2A1299159D400782BEE /* ODCompositionObjectType.swift in Sources */,
+				703FA295299151ED00782BEE /* ObjectsListView.swift in Sources */,
 				70C0BEAC297FBF7B00BA29AD /* ImageLoaderViewModel.swift in Sources */,
 				70C0BEB429801F6C00BA29AD /* CornerRadiusShape.swift in Sources */,
 				70C0BEA0297FB88500BA29AD /* ContentView.swift in Sources */,
 				70C0BEB229801EFC00BA29AD /* CornerRadiusStyle.swift in Sources */,
+				703FA29F2991532000782BEE /* ODCompositionObject.swift in Sources */,
 				70C0BEB029801A1300BA29AD /* MainPageViewModel.swift in Sources */,
+				701F31822993AF1500DD3942 /* ODCompositionObjectContent.swift in Sources */,
+				703FA298299152CD00782BEE /* ODCanvas.swift in Sources */,
+				701F31802993916800DD3942 /* ObjectsListRow.swift in Sources */,
+				703FA29C299152F500782BEE /* ODText.swift in Sources */,
 				70C0BEAE2980193D00BA29AD /* MainPageView.swift in Sources */,
 				70C0BEB629801FEE00BA29AD /* View+Extensions.swift in Sources */,
 				70C0BE9E297FB88500BA29AD /* OlwaDrawApp.swift in Sources */,
+				703FA29A299152E900782BEE /* ODImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
