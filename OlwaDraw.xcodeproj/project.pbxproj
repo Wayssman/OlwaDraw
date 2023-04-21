@@ -11,6 +11,7 @@
 		701F31822993AF1500DD3942 /* ODCompositionObjectContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F31812993AF1500DD3942 /* ODCompositionObjectContent.swift */; };
 		701F318D2993CD2200DD3942 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F318B2993CD2200DD3942 /* MainPageView.swift */; };
 		701F318E2993CD2200DD3942 /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F318C2993CD2200DD3942 /* MainPageViewModel.swift */; };
+		703085AA29A4B1FC0078E63D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703085A929A4B1FC0078E63D /* ImagePicker.swift */; };
 		703FA295299151ED00782BEE /* ObjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FA294299151ED00782BEE /* ObjectsListView.swift */; };
 		703FA298299152CD00782BEE /* ODCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FA297299152CD00782BEE /* ODCanvas.swift */; };
 		703FA29A299152E900782BEE /* ODImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FA299299152E900782BEE /* ODImage.swift */; };
@@ -30,6 +31,7 @@
 		701F31812993AF1500DD3942 /* ODCompositionObjectContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODCompositionObjectContent.swift; sourceTree = "<group>"; };
 		701F318B2993CD2200DD3942 /* MainPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
 		701F318C2993CD2200DD3942 /* MainPageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
+		703085A929A4B1FC0078E63D /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		703FA294299151ED00782BEE /* ObjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsListView.swift; sourceTree = "<group>"; };
 		703FA297299152CD00782BEE /* ODCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODCanvas.swift; sourceTree = "<group>"; };
 		703FA299299152E900782BEE /* ODImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODImage.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				701F318B2993CD2200DD3942 /* MainPageView.swift */,
 				701F318C2993CD2200DD3942 /* MainPageViewModel.swift */,
+				703085A929A4B1FC0078E63D /* ImagePicker.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				701F31802993916800DD3942 /* ObjectsListRow.swift in Sources */,
 				703FA29C299152F500782BEE /* ODText.swift in Sources */,
 				70C0BEB629801FEE00BA29AD /* View+Extensions.swift in Sources */,
+				703085AA29A4B1FC0078E63D /* ImagePicker.swift in Sources */,
 				70C0BE9E297FB88500BA29AD /* OlwaDrawApp.swift in Sources */,
 				703FA29A299152E900782BEE /* ODImage.swift in Sources */,
 			);

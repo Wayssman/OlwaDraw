@@ -10,6 +10,7 @@ import PhotosUI
 
 struct MainPageView: View {
     @ObservedObject var viewModel = MainPageViewModel()
+    @State private var showingImagePicker = false
     
     var body: some View {
         VStack {
@@ -59,20 +60,17 @@ struct MainPageView: View {
             // Instrumental Panel
             HStack(spacing: 10) {
                 // Picker Action Button
-                PhotosPicker(
-                    selection: $viewModel.lastPickedItem,
-                    matching: .images,
-                    photoLibrary: .shared()
-                ) {
-                    Text("Фон")
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity, maxHeight: 100)
-                        .background(
-                            Rectangle()
-                                .fill(.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        )
-                }
+                Rectangle()
+                    .fill(.gray.opacity(0.2))
+                    .frame(maxHeight: 100)
+                    .cornerRadius(10)
+                    .background {
+                        Text("Фон")
+                            .foregroundColor(.black)
+                    }
+                    .onTapGesture {
+                        showingImagePicker = true
+                    }
                 
                 // Other
                 Rectangle()
@@ -102,6 +100,9 @@ struct MainPageView: View {
                 message: Text("Не удалось экспортировать изображение"),
                 dismissButton: .cancel()
             )
+        }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker(viewModel: viewModel)
         }
     }
 }
