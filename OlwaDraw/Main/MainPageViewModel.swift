@@ -7,14 +7,10 @@
 
 import SwiftUI
 import PhotosUI
+import ImageIO
 
 @MainActor class MainPageViewModel: NSObject, ObservableObject {
     // MARK: Properties
-    @Published var lastPickedItem: PhotosPickerItem? {
-        didSet {
-            didPickItemFromGallery()
-        }
-    }
     @Published var compositionObjects: [ODCompositionObject] = []
     @Published var isAlertShown: Bool = false
     var assembledCompositionImage: UIImage?
@@ -26,6 +22,23 @@ import PhotosUI
         assembleComposition()
     }
     
+    // MARK: Interface
+    func addImageToComposition(imageUrl: URL) {
+        guard let image = downsample(imageAt: imageUrl, to: .init(width: 720, height: 720), scale: 1) else {
+            return
+        }
+        
+        let imageObject = ODImage(image: image)
+        let imageCompositionObject = ODCompositionObject(
+            content: .image(imageObject),
+            layerIndex: compositionObjects.count
+        )
+        resizeCanvasIfNeeded(toFit: imageObject)
+        compositionObjects.append(imageCompositionObject)
+        
+        assembleComposition()
+    }
+    
     // MARK: Internal
     private func prepareCanvas() {
         guard compositionObjects.first?.content.type != .canvas else {
@@ -33,7 +46,7 @@ import PhotosUI
         }
         
         let canvasObject = ODCanvas(
-            size: CGSize(width: 10, height: 10),
+            size: CGSize(width: 50, height: 50),
             backgroundColor: .white
         )
         let canvasCompositionObject = ODCompositionObject(
@@ -52,31 +65,43 @@ import PhotosUI
             return
         }
         
-        UIImageWriteToSavedPhotosAlbum(imageForExport, self, #selector(exportCompletion), nil)
+        
+        PHPhotoLibrary.shared().performChanges {
+            _ = PHAssetChangeRequest.creationRequestForAsset(from: imageForExport)
+        }
     }
     
     @objc private func exportCompletion(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         isAlertShown = (error != nil)
     }
     
-    private func addImageToComposition() {
-        Task {
-            guard
-                let data = try? await lastPickedItem?.loadTransferable(type: Data.self),
-                let image = UIImage(data: data)
-            else {
-                return
-            }
-            
-            let imageObject = ODImage(image: image)
-            let imageCompositionObject = ODCompositionObject(
-                content: .image(imageObject),
-                layerIndex: compositionObjects.count
-            )
-            resizeCanvasIfNeeded(toFit: imageObject)
-            compositionObjects.append(imageCompositionObject)
-            assembleComposition()
+    private func downsample(
+        imageAt imageUrl: URL,
+        to pointSize: CGSize,
+        scale: CGFloat
+    ) -> UIImage? {
+        // Calculatge the desire dimension
+        let maxDimensionInPixels = max(pointSize.width, pointSize.height) * scale
+        
+        // Perform downsampling
+        let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+        
+        let downsampleOptions = [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceShouldCacheImmediately: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceThumbnailMaxPixelSize: maxDimensionInPixels
+        ] as CFDictionary
+        
+        guard
+            let imageSource = CGImageSourceCreateWithURL(imageUrl as NSURL, imageSourceOptions),
+            let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions)
+        else {
+            return nil
         }
+        
+        // Return the downsampled image as UIImage
+        return UIImage(cgImage: downsampledImage)
     }
     
     private func resizeCanvasIfNeeded(toFit imageObject: ODImage) {
@@ -92,7 +117,9 @@ import PhotosUI
         
         if expandHeight || expandWidth {
             var expandedCanvasObject = canvasObject
-            expandedCanvasObject.size = imageObject.image.size
+            let width = min(imageObject.image.size.width, 4032)
+            let height = min(imageObject.image.size.height, 4032)
+            expandedCanvasObject.size = CGSize(width: width, height: height)
             compositionObjects[0].content = .canvas(expandedCanvasObject)
         }
     }
@@ -124,25 +151,7 @@ import PhotosUI
     }
     
     private func apply(object: ODImage, to context: UIGraphicsImageRendererContext, with size: CGSize) {
-        guard let cgImage = object.image.cgImage else {
-            return
-        }
-        
-        let offsetX = (size.width - object.image.size.width) / 2
-        let offsetY = (size.height - object.image.size.height) / 2
-        context.cgContext.draw(
-            cgImage,
-            in: CGRect(
-                origin: .init(x: offsetX, y: offsetY),
-                size: size
-            )
-        )
-    }
-}
-
-// MARK: - User Interactivity
-extension MainPageViewModel {
-    private func didPickItemFromGallery() {
-        addImageToComposition()
+        let size = object.image.size
+        object.image.draw(in: CGRect(origin: .zero, size: size))
     }
 }
