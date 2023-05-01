@@ -10,105 +10,116 @@ import PhotosUI
 
 struct MainPageView: View {
     @ObservedObject var viewModel = MainPageViewModel()
+    @Environment(\.safeAreaInsets) private var safeAreaInsets
     @State private var showingImagePicker = false
+    @State private var objectsListOffset = CGFloat(0)
+    @State private var headerWidth = CGFloat(0)
+    private var minHeight: CGFloat = 200
+    private var maxHeight: CGFloat {
+        guard let image = viewModel.assembledCompositionImage else {
+            return minHeight
+        }
+        
+        let ratio = image.size.height / image.size.width
+        let width = headerWidth
+        let height = width * ratio + 15 + 80 - 20
+        
+        return (height > minHeight && height < 800) ? height: minHeight
+    }
     
     var body: some View {
-        VStack {
-            // Image Preview Area
-            ZStack(alignment: .topTrailing) {
-                // Image Preview
-                Rectangle()
-                    .fill(.gray.opacity(0.2))
-                
-                if
-                    let uiImage = viewModel.assembledCompositionImage
-                {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFit()
-                }
-                
-                // Export Button
-                ZStack(alignment: .center) {
-                    Circle()
-                        .fill(.white)
-                        .frame(
-                            width: 32,
-                            height: 32
-                        )
+        ZStack(alignment: .topTrailing) {
+            VStack {
+                // Header
+                GeometryReader { geometry in
+                    Color.clear
+                        .preference(key: HeaderFramePreferenceKey.self, value: [geometry.size])
                     
-                    Image(systemName: "square.and.arrow.up")
-                        .resizable()
-                        .frame(width: 14, height: 16)
-                        .offset(y: -2)
-                        .foregroundColor(.black)
+                    VStack {
+                        ImageObserverView(
+                            image: viewModel.assembledCompositionImage
+                        )
+                        
+                        InstrumentalPanelView(
+                            imageButtonTapped: $showingImagePicker
+                        )
+                        
+                        Spacer()
+                    }
+                    .frame(height: getHeaderHeight())
                 }
-                .offset(
-                    CGSize(
-                        width: -10,
-                        height: 10
-                    )
+                .frame(height: minHeight)
+                
+                // Content
+                ObjectsListView(
+                    viewModel: viewModel,
+                    contentOffset: $objectsListOffset,
+                    insideContentOffset: maxHeight - minHeight
                 )
-                .shadow(radius: 2)
+                .zIndex(-1)
+            }
+            .onPreferenceChange(HeaderFramePreferenceKey.self) { headerSize in
+                print("newheadersize: \(headerSize)")
+                headerWidth = headerSize[0].width
+            }
+            .sheet(isPresented: $showingImagePicker) {
+                ImagePicker(viewModel: viewModel)
+            }
+            .alert(isPresented: $viewModel.isAlertShown) {
+                Alert(
+                    title: Text("Ошибка"),
+                    message: Text("Не удалось экспортировать изображение"),
+                    dismissButton: .cancel()
+                )
+            }
+            
+            RoundButtonView(systemIconName: "square.and.arrow.up")
+                .offset(CGSize(width: -20, height: 0))
                 .onTapGesture {
                     viewModel.exportData()
                 }
-            }
-            .padding(.leading, 10)
-            .padding(.trailing, 10)
-            
-            // Instrumental Panel
-            HStack(spacing: 10) {
-                // Picker Action Button
-                Rectangle()
-                    .fill(.gray.opacity(0.2))
-                    .frame(maxHeight: 100)
-                    .cornerRadius(10)
-                    .background {
-                        Text("Фон")
-                            .foregroundColor(.black)
-                    }
-                    .onTapGesture {
-                        showingImagePicker = true
-                    }
-                
-                // Other
-                Rectangle()
-                    .fill(.gray.opacity(0.7))
-                    .frame(maxHeight: 100)
-                    .cornerRadius(10)
-                
-                // Other
-                Rectangle()
-                    .fill(.gray.opacity(0.7))
-                    .frame(maxHeight: 100)
-                    .cornerRadius(10)
-            }
-            .padding(.leading, 10)
-            .padding(.trailing, 10)
-            
-            // Items List
-            ObjectsListView(viewModel: viewModel)
-                .frame(maxHeight: 200)
-                .cornerRadius(radius: 20, corners: [.topLeft, .topRight])
-                .shadow(color: .gray, radius: 8, x: 0, y: 0)
         }
-        .edgesIgnoringSafeArea(.bottom)
-        .alert(isPresented: $viewModel.isAlertShown) {
-            Alert(
-                title: Text("Ошибка"),
-                message: Text("Не удалось экспортировать изображение"),
-                dismissButton: .cancel()
-            )
+    }
+    
+    
+    func getHeaderHeight() -> CGFloat {
+        let offset = objectsListOffset
+        
+        guard offset > 0 else {
+            return maxHeight
         }
-        .sheet(isPresented: $showingImagePicker) {
-            ImagePicker(viewModel: viewModel)
+        
+        if offset < (maxHeight - minHeight) {
+            return maxHeight - offset
         }
+        return minHeight
     }
 }
 
 struct MainPageView_Previews: PreviewProvider {
     static var previews: some View {
         MainPageView()
+    }
+}
+
+private struct SafeAreaInsetsKey: EnvironmentKey {
+    static var defaultValue: UIEdgeInsets {
+        UIApplication.shared.connectedScenes.filter { $0.activationState == .foregroundActive }.compactMap { $0 as? UIWindowScene }.first?.windows.first(where: { $0.isKeyWindow })?.safeAreaInsets ?? UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+}
+
+extension EnvironmentValues {
+    var safeAreaInsets: UIEdgeInsets {
+        self[SafeAreaInsetsKey.self]
+    }
+}
+
+struct HeaderFramePreferenceKey: PreferenceKey {
+    typealias Value = [CGSize]
+    
+    static var defaultValue: [CGSize] = []
+    
+    static func reduce(value: inout [CGSize], nextValue: () -> [CGSize]) {
+        value.append(contentsOf: nextValue())
     }
 }
