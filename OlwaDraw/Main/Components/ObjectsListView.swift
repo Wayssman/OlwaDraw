@@ -30,15 +30,26 @@ struct ObjectsListView: View {
                             
                             switch compositionObject.content {
                             case .canvas(let canvas):
-                                let text = "\(canvas.size.width)x\(canvas.size.height)"
-                                Text(text)
+                                let text = "\(canvas.size.width) x \(canvas.size.height)"
+                                ObjectsListRow(color: canvas.backgroundColor, name: text, isDraggable: false)
                             case .image(let image):
-                                Text("\(compositionObject.layerIndex)")
+                                ObjectsListRow(image: image.image, name: "Изображение", isDraggable: true)
+                                    .onDrag {
+                                        self.viewModel.draggedObject = compositionObject
+                                        return NSItemProvider()
+                                    }
+                                    .onDrop(
+                                        of: [.text],
+                                        delegate: ObjectsListDropViewDelegate(
+                                            destinationItem: compositionObject,
+                                            viewModel: viewModel,
+                                            draggedItem: $viewModel.draggedObject
+                                        )
+                                    )
                             }
                         }
                     }
                     .frame(maxWidth: .infinity)
-                    .background(.green)
                     .offset(y: insideContentOffset)
                     .padding(.bottom, insideContentOffset)
             }

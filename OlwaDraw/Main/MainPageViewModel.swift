@@ -12,6 +12,7 @@ import ImageIO
 @MainActor class MainPageViewModel: NSObject, ObservableObject {
     // MARK: Properties
     @Published var compositionObjects: [ODCompositionObject] = []
+    @Published var draggedObject: ODCompositionObject?
     @Published var isAlertShown: Bool = false
     var assembledCompositionImage: UIImage?
     
@@ -24,7 +25,7 @@ import ImageIO
     
     // MARK: Interface
     func addImageToComposition(imageUrl: URL) {
-        guard let image = downsample(imageAt: imageUrl, to: .init(width: 720, height: 720), scale: 1) else {
+        guard let image = downsample(imageAt: imageUrl, to: .init(width: 420, height: 420), scale: 1) else {
             return
         }
         
@@ -36,6 +37,10 @@ import ImageIO
         resizeCanvasIfNeeded(toFit: imageObject)
         compositionObjects.append(imageCompositionObject)
         
+        assembleComposition()
+    }
+    
+    func applyPropertiesChanges() {
         assembleComposition()
     }
     

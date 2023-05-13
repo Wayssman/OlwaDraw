@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct MainPageView: View {
-    @ObservedObject var viewModel = MainPageViewModel()
+    @StateObject var viewModel = MainPageViewModel()
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     @State private var showingImagePicker = false
     @State private var objectsListOffset = CGFloat(0)
@@ -59,7 +59,6 @@ struct MainPageView: View {
                 .zIndex(-1)
             }
             .onPreferenceChange(HeaderFramePreferenceKey.self) { headerSize in
-                print("newheadersize: \(headerSize)")
                 headerWidth = headerSize[0].width
             }
             .sheet(isPresented: $showingImagePicker) {
