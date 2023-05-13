@@ -14,6 +14,7 @@
 		701F31822993AF1500DD3942 /* ODCompositionObjectContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F31812993AF1500DD3942 /* ODCompositionObjectContent.swift */; };
 		701F318D2993CD2200DD3942 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F318B2993CD2200DD3942 /* MainPageView.swift */; };
 		701F318E2993CD2200DD3942 /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F318C2993CD2200DD3942 /* MainPageViewModel.swift */; };
+		702A01092A0EAA6C00CE25D2 /* ObjectsListDropViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A01082A0EAA6C00CE25D2 /* ObjectsListDropViewDelegate.swift */; };
 		703085AA29A4B1FC0078E63D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703085A929A4B1FC0078E63D /* ImagePicker.swift */; };
 		703FA295299151ED00782BEE /* ObjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FA294299151ED00782BEE /* ObjectsListView.swift */; };
 		703FA298299152CD00782BEE /* ODCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FA297299152CD00782BEE /* ODCanvas.swift */; };
@@ -37,6 +38,7 @@
 		701F31812993AF1500DD3942 /* ODCompositionObjectContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODCompositionObjectContent.swift; sourceTree = "<group>"; };
 		701F318B2993CD2200DD3942 /* MainPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
 		701F318C2993CD2200DD3942 /* MainPageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
+		702A01082A0EAA6C00CE25D2 /* ObjectsListDropViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsListDropViewDelegate.swift; sourceTree = "<group>"; };
 		703085A929A4B1FC0078E63D /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		703FA294299151ED00782BEE /* ObjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsListView.swift; sourceTree = "<group>"; };
 		703FA297299152CD00782BEE /* ODCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODCanvas.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				703FA294299151ED00782BEE /* ObjectsListView.swift */,
+				702A01082A0EAA6C00CE25D2 /* ObjectsListDropViewDelegate.swift */,
 				701F317F2993916800DD3942 /* ObjectsListRow.swift */,
 				700C8D6E29FF986A00B4B57B /* RoundButtonView.swift */,
 				700C8D7029FF995800B4B57B /* InstrumentalPanelView.swift */,
@@ -239,6 +242,7 @@
 				703FA2A1299159D400782BEE /* ODCompositionObjectType.swift in Sources */,
 				700C8D7129FF995800B4B57B /* InstrumentalPanelView.swift in Sources */,
 				703FA295299151ED00782BEE /* ObjectsListView.swift in Sources */,
+				702A01092A0EAA6C00CE25D2 /* ObjectsListDropViewDelegate.swift in Sources */,
 				700C8D7329FF9A2C00B4B57B /* ImageObserverView.swift in Sources */,
 				701F318D2993CD2200DD3942 /* MainPageView.swift in Sources */,
 				70C0BEB429801F6C00BA29AD /* CornerRadiusShape.swift in Sources */,
